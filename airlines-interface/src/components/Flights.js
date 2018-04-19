@@ -49,17 +49,17 @@ function SearchResults(props){
   console.log(props.flights)
     return(
       <div>
-
-          { props.flight.map(f => <p key={f.id}>{f.from}</p>) }
-          { props.flight.map(f => <p key={f.id}>{f.to}</p>) }
-
+        <ul>
+          { props.flights.map(f => <li key={f.id}>{f.flight_number}  {f.origin},   {f.destination},   {f.departure_date}</li>) }
+        </ul>
       </div>
     );
   }
 
 class Flights extends Component{
   constructor(props){
-    super(props); //NEEDS CHANGING BASED ON BACKEND
+    super(props);
+    console.log(this.state);
     this.state = {flights: []};
     this.searchFlights = this.searchFlights.bind(this);
 
@@ -75,14 +75,19 @@ class Flights extends Component{
 
     }).then(function(p){
       console.log(p.data[0].origin);
+
+      let flights = []
       for(let i = 0; i < p.data.length-1; i++){
-        if (p.data[i].origin === f && p.data[i].destination === t){
-          console.log(p.data[i].flight_number);
-          console.log(this);
-          this.setState({flights: p.data[i]})
-        }
-      }
-    }.bind(this))
+       if (p.data[i].origin === f && p.data[i].destination === t){
+         console.log(p.data[i].flight_number);
+         flights.push(p.data[i]);
+
+         console.log({flights: p.data[i]});
+        // for(let i = 0; i < this.length; i++){
+        //   if(this[])
+        // }
+      }}
+      this.setState({flights})}.bind(this))
   }
 
 
