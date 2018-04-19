@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Flights from './Flights';
+import SeatMap from './Seat';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Flights/>
+        <SeatMap/>
       </div>
     );
   }

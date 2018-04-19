@@ -4,8 +4,8 @@ import axios from 'axios';
 class SearchingArea extends Component{
   constructor(props){
     super(props)
-    this.state = {from:''};
-    this.state = {to:''}
+    this.state = {from: ''};
+    this.state = {to: ''}
     this._fromChange = this._fromChange.bind(this);
     this._toChange = this._toChange.bind(this);
     this._handleSearch = this._handleSearch.bind(this);
@@ -17,7 +17,7 @@ class SearchingArea extends Component{
     console.log(`From value is ${e.target.value}`);
   }
   _toChange(e) {
-    this.setState( { to: e.target.value } )
+    this.setState( { to: e.target.value } );
     console.log(`To value is ${e.target.value}`);
   }
 
@@ -25,8 +25,8 @@ class SearchingArea extends Component{
     e.preventDefault();
     let to = this.state.to
     let from = this.state.from
-    this.setState({})
     this.props.onSubmit(this.state.from, this.state.to);
+    this.setState({ from: '', to: '' })
   }
 
 
@@ -44,12 +44,14 @@ class SearchingArea extends Component{
     );
   }
 }
+
 function SearchResults(props){
   console.log(props.flights)
     return(
       <div>
 
-          <p>{props.flight.origin}</p>
+          { props.flight.map(f => <p key={f.id}>{f.from}</p>) }
+          { props.flight.map(f => <p key={f.id}>{f.to}</p>) }
 
       </div>
     );
@@ -59,7 +61,7 @@ class Flights extends Component{
   constructor(props){
     super(props); //NEEDS CHANGING BASED ON BACKEND
     this.state = {flights: []};
-    this.searchFlights =this.searchFlights.bind(this);
+    this.searchFlights = this.searchFlights.bind(this);
 
   }
 
